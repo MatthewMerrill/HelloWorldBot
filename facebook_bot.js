@@ -90,7 +90,8 @@ var controller = Botkit.facebookbot({
 });
 
 var bot = controller.spawn({
-});
+    name: 'meme-ssenger'
+});-
 
 controller.setupWebserver(process.env.port || process.env.PORT || 3000, function(err, webserver) {
     controller.createWebhookEndpoints(webserver, bot, function() {
@@ -284,7 +285,7 @@ controller.hears(['shutdown'], 'message_received', function(bot, message) {
     });
 });*/
 
-
+/*
 controller.hears(['#uptime', '#mm-about', '#mm-uptime'], 'message_received',
     function(bot, message) {
 
@@ -295,7 +296,7 @@ controller.hears(['#uptime', '#mm-about', '#mm-uptime'], 'message_received',
             ':robot_face: I am a bot named <@' + bot.identity.name +
              '>. I have been running for ' + uptime + ' on ' + hostname + '.');
     });
-
+*/
 
 controller.hears(['#mm-version'], 'message_received',
     function(bot, message) {
