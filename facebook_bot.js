@@ -327,12 +327,12 @@ controller.hears(['#green (.+)'], 'message_received', function(bot, message) {
                         'title': 'Greentext by ' + message.user.name,
                         'image_url': 'http://mm-nim.herokuapp.com/greentext?text='+ jsesc(message.match[1]),
                         'subtitle': 'Greentext-ify',
-                        'buttons': [/*
+                        'buttons': [
                             {
                                 'type': 'web_url',
-                                'url': 'https://petersapparel.parseapp.com/view_item?item_id=100',
-                                'title': 'View Item'
-                            },
+                                'url': 'http://mm-nim.herokuapp.com/greentext?text='+ jsesc(message.match[1]),
+                                'title': 'View text'
+                            }/*,
                             {
                                 'type': 'web_url',
                                 'url': 'https://petersapparel.parseapp.com/buy_item?item_id=100',
