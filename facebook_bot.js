@@ -296,7 +296,7 @@ controller.hears(['uptime', 'identify yourself', 'who are you', 'what is your na
              '>. I have been running for ' + uptime + ' on ' + hostname + '.');
     });
 
-controller.hears(['((^|\s)(\w\s){1,15}(\w$|\w\s))', '/^([a-zA-Z]\s)+[a-zA-Z]$/i', '^([a-zA-Z]\s)+[a-zA-Z]$'],'direct_message,direct_mention,mention',function(bot, message) {
+controller.hears(['((^|\\s)(\\w\\s){1,15}(\\w$|\\w\\s))', '/^([a-zA-Z]\\s)+[a-zA-Z]$/i', '^([a-zA-Z]\\s)+[a-zA-Z]$'],'direct_message,direct_mention,mention',function(bot, message) {
     var ogmeme = message.match[1];
     var meme = message.match[1];
     for (var ch in ogmeme) {
