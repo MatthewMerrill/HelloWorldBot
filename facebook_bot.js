@@ -81,6 +81,7 @@ if (!process.env.verify_token) {
 
 var Botkit = require('./lib/Botkit.js');
 var os = require('os');
+var jsesc = require('jsesc');
 
 var controller = Botkit.facebookbot({
     debug: true,
@@ -110,7 +111,7 @@ controller.hears(['hello', 'hi'], 'message_received', function(bot, message) {
     });
 });
 
-
+/*
 controller.hears(['structured'], 'message_received', function(bot, message) {
 
     bot.reply(message, {
@@ -167,7 +168,7 @@ controller.hears(['structured'], 'message_received', function(bot, message) {
             }
         }
     });
-});
+});*/
 
 controller.on('facebook_postback', function(bot, message) {
 
@@ -256,7 +257,7 @@ controller.hears(['what is my name', 'who am i'], 'message_received', function(b
         }
     });
 });
-
+/*
 controller.hears(['shutdown'], 'message_received', function(bot, message) {
 
     bot.startConversation(message, function(err, convo) {
@@ -282,7 +283,7 @@ controller.hears(['shutdown'], 'message_received', function(bot, message) {
         }
         ]);
     });
-});
+});*/
 
 
 controller.hears(['uptime', 'identify yourself', 'who are you', 'what is your name'], 'message_received',
@@ -297,19 +298,57 @@ controller.hears(['uptime', 'identify yourself', 'who are you', 'what is your na
     });
 
 
-controller.hears(['memer-version'], 'message_received',
+controller.hears(['#mm-version'], 'message_received',
     function(bot, message) {
         bot.reply(message,
-            '1.0');
+            'alpha 1.1');
     });
 
-controller.hears(['((^|\\s)(\\w\\s){1,15}(\\w$|\\w\\s))', '^([a-zA-Z]\s)+[a-zA-Z]$', '^([a-zA-Z]\s)+[a-zA-Z]$'],'message_received',function(bot, message) {
+controller.hears(['((^|\\s)(\\w\\s){1,15}(\\w$|\\w\\s))', '#meme (.{3:16})'],'message_received',function(bot, message) {
     var ogmeme = message.match[1];
     var meme = message.match[1];
     for (var i = 2, len = ogmeme.length; i < len; i+=2) {
-        meme += '\n' + ogmeme[i];
+        if (!CharacterData.isWhiteSpace(ogmeme[i]))
+            meme += '\n' + ogmeme[i];
     }
     bot.reply(message, meme.toUpperCase());
+});
+
+
+controller.hears(['#green (.+)'], 'message_received', function(bot, message) {
+
+    bot.reply(message, {
+        attachment: {
+            'type': 'template',
+            'payload': {
+                'template_type': 'generic',
+                'elements': [
+                    {
+                        'title': '',
+                        'image_url': 'http://mm-nim.herokuapp.com/greentext?text='+ jsesc(message.match[1]),
+                        'subtitle': 'Greentext-ify',
+                        'buttons': [/*
+                            {
+                                'type': 'web_url',
+                                'url': 'https://petersapparel.parseapp.com/view_item?item_id=100',
+                                'title': 'View Item'
+                            },
+                            {
+                                'type': 'web_url',
+                                'url': 'https://petersapparel.parseapp.com/buy_item?item_id=100',
+                                'title': 'Buy Item'
+                            },
+                            {
+                                'type': 'postback',
+                                'title': 'Bookmark Item',
+                                'payload': 'White T-Shirt'
+                            }
+                        */]
+                    }
+                ]
+            }
+        }
+    });
 });
 
 
