@@ -339,7 +339,7 @@ controller.hears(['#green'], 'message_received', function(bot, message) {
                         'buttons': [
                             {
                                 'type': 'web_url',
-                                'url': 'http://mm-nim.herokuapp.com/greentext?text='+ url,
+                                'url': url,
                                 'title': 'View text'
                             }/*,
                             {
