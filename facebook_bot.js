@@ -296,11 +296,18 @@ controller.hears(['uptime', 'identify yourself', 'who are you', 'what is your na
              '>. I have been running for ' + uptime + ' on ' + hostname + '.');
     });
 
+
+controller.hears(['version'], 'message_received',
+    function(bot, message) {
+        bot.reply(message,
+            ':robot_face: a0.1');
+    });
+
 controller.hears(['((^|\\s)(\\w\\s){1,15}(\\w$|\\w\\s))', '^([a-zA-Z]\s)+[a-zA-Z]$', '^([a-zA-Z]\s)+[a-zA-Z]$'],'message_received',function(bot, message) {
     var ogmeme = message.match[1];
     var meme = message.match[1];
-    for (var ch in ogmeme) {
-        meme += '\n' + ch;
+    for (var i = 0, len = ogmeme.length; i < len; i+=2) {
+        meme += '\n' + ogmeme[i];
     }
     bot.reply(message, meme);
 });
