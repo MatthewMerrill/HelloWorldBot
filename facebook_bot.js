@@ -320,9 +320,11 @@ controller.hears(['#green'], 'message_received', function(bot, message) {
         .replace('\\n', '\n')
         .replace('\n', '%0A')
 
-    console.log(msg);
-
     var text = msg.substring(msg.indexOf('#green') + 6).trim();
+    var url = 'http://mm-nim.herokuapp.com/greentext?text='+ jsesc(msg);
+
+    console.log(text);
+    console.log(url);
 
     bot.reply(message, {
         attachment: {
@@ -332,12 +334,12 @@ controller.hears(['#green'], 'message_received', function(bot, message) {
                 'elements': [
                     {
                         'title': 'Greentext by ' + message.user.name,
-                        'image_url': 'http://mm-nim.herokuapp.com/greentext?text='+ jsesc(msg),
+                        'image_url': url,
                         'subtitle': 'Greentext-ify',
                         'buttons': [
                             {
                                 'type': 'web_url',
-                                'url': 'http://mm-nim.herokuapp.com/greentext?text='+ jsesc(msg),
+                                'url': 'http://mm-nim.herokuapp.com/greentext?text='+ url,
                                 'title': 'View text'
                             }/*,
                             {
