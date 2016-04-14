@@ -304,7 +304,7 @@ controller.hears(['#mm-version'], 'message_received',
             'alpha 1.1');
     });
 
-controller.hears(['((^|\\s)(\\w\\s){1,15}(\\w$|\\w\\s))', '#meme (.{3:16})'],'message_received',function(bot, message) {
+controller.hears(['((^|\\s)(\\w\\s){1,15}(\\w$|\\w\\s))', 'meme (.{3:16})'],'message_received',function(bot, message) {
     var ogmeme = message.match[1];
     var meme = message.match[1];
     for (var i = 2, len = ogmeme.length; i < len; i+=2) {
@@ -324,7 +324,7 @@ controller.hears(['#green (.+)'], 'message_received', function(bot, message) {
                 'template_type': 'generic',
                 'elements': [
                     {
-                        'title': '',
+                        'title': 'Greentext by ' + message.user.name,
                         'image_url': 'http://mm-nim.herokuapp.com/greentext?text='+ jsesc(message.match[1]),
                         'subtitle': 'Greentext-ify',
                         'buttons': [/*
