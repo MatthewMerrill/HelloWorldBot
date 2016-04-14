@@ -81,7 +81,7 @@ if (!process.env.verify_token) {
 
 var Botkit = require('./lib/Botkit.js');
 var os = require('os');
-var jsesc = require('jsesc');
+var urlencode= require('urlencode');
 
 var controller = Botkit.facebookbot({
     debug: true,
@@ -321,7 +321,7 @@ controller.hears(['#green'], 'message_received', function(bot, message) {
         .replace('\n', '%0A')
 
     var text = msg.substring(msg.indexOf('#green') + 6).trim();
-    var url = 'http://mm-nim.herokuapp.com/greentext?text='+ jsesc(msg);
+    var url = 'http://mm-nim.herokuapp.com/greentext?text='+ urlencode(text);
 
     console.log(text);
     console.log(url);
