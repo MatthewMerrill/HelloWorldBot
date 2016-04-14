@@ -297,16 +297,16 @@ controller.hears(['uptime', 'identify yourself', 'who are you', 'what is your na
     });
 
 
-controller.hears(['version'], 'message_received',
+controller.hears(['memer-version'], 'message_received',
     function(bot, message) {
         bot.reply(message,
-            ':robot_face: a0.1');
+            '1.0');
     });
 
 controller.hears(['((^|\\s)(\\w\\s){1,15}(\\w$|\\w\\s))', '^([a-zA-Z]\s)+[a-zA-Z]$', '^([a-zA-Z]\s)+[a-zA-Z]$'],'message_received',function(bot, message) {
     var ogmeme = message.match[1];
     var meme = message.match[1];
-    for (var i = 0, len = ogmeme.length; i < len; i+=2) {
+    for (var i = 2, len = ogmeme.length; i < len; i+=2) {
         meme += '\n' + ogmeme[i];
     }
     bot.reply(message, meme);
