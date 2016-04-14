@@ -83,6 +83,11 @@ var Botkit = require('./lib/Botkit.js');
 var os = require('os');
 var urlencode= require('urlencode');
 
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.split(search).join(replacement);
+};
+
 var controller = Botkit.facebookbot({
     debug: true,
     access_token: process.env.page_token,
@@ -317,11 +322,11 @@ controller.hears(['((^|\\s)(\\w\\s){1,15}(\\w$|\\w\\s))', '#meme (.+)'],'message
 
 controller.hears(['#green'], 'message_received', function(bot, message) {
     var msg = message.text
-        .replace('\\n', '\n')
-        .replace('\n', '%0A')
+        .replaceAll('\\n', '\n')
+        .replaceAll('\n', '%0A')
 
     var text = msg.substring(msg.indexOf('#green') + 6).trim();
-    var url = 'http://mm-nim.herokuapp.com/greentext?text='+ urlencode(text);
+    var url = 'http://mm-nim.herokuapp.com/greentext?text=' + text;
 
     console.log(text);
     console.log(url);
