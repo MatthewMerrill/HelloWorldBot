@@ -317,8 +317,8 @@ controller.hears(['((^|\\s)(\\w\\s){1,15}(\\w$|\\w\\s))', '#meme (.+)'],'message
 
 controller.hears(['#green'], 'message_received', function(bot, message) {
     var msg = message.text
-        .replaceAll('\\n', '\n')
-        .replaceAll('\n', '%0A')
+        .replace('\\n', '\n')
+        .replace('\n', '%0A')
 
     var text = msg.substring(msg.indexOf('#green') + 6).trim();
 
