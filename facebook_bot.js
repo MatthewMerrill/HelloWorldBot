@@ -296,14 +296,23 @@ controller.hears(['uptime', 'identify yourself', 'who are you', 'what is your na
              '>. I have been running for ' + uptime + ' on ' + hostname + '.');
     });
 
-controller.hears(['((^|\s)(\w\s){2,15}(\w$|\w\s))'],'direct_message,direct_mention,mention',function(bot, message) {
-    var ogmeme = message.match[1];
-    var meme = message.match[1];
-    for (var ch in ogmeme) {
-        meme += '\n' + ch;
-    }
-    bot.reply(message, meme);
-});
+controller.hears(['version'], 'message_received',
+    function(bot, message) {
+
+        bot.reply(message,
+            ':robot_face: 0.0');
+    });
+
+controller.hears(['(\s(\w\s){1,15}\w\s)', '(\s(\w\s){1,15}\w$)', '(^(\w\s){1,15}\w\s)', '(^(\w\s){1,15}\w$)'],'direct_message,direct_mention,mention',
+    function(bot, message) {
+        console.log(message);
+        var ogmeme = message.match[1];
+        var meme = message.match[1];
+        for (var ch in ogmeme) {
+            meme += '\n' + ch;
+        }
+        bot.reply(message, meme);
+    });
 
 
 controller.on('message_received', function(bot, message) {
