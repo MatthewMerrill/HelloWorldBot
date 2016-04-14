@@ -103,7 +103,7 @@ controller.hears(['hello', 'hi'], 'message_received', function(bot, message) {
 
     controller.storage.users.get(message.user, function(err, user) {
         if (user && user.name) {
-            bot.reply(message, 'Hello ' + user.name + '!!');
+            bot.reply(message, 'Why hello, ' + user.name + '!!');
         } else {
             bot.reply(message, 'Hello.');
         }
