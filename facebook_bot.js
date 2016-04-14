@@ -304,10 +304,10 @@ controller.hears(['#mm-version'], 'message_received',
             'alpha 1.2');
     });
 
-controller.hears(['((^|\\s)(\\w\\s){1,15}(\\w$|\\w\\s))', '#meme ((\\w){3:16})'],'message_received',function(bot, message) {
+controller.hears(['((^|\\s)(\\w\\s){1,15}(\\w$|\\w\\s))', '#meme (.+)'],'message_received',function(bot, message) {
     var ogmeme = message.match[1];
     var meme = message.match[1];
-    for (var i = 2, len = ogmeme.length; i < len; i+=2) {
+    for (var i = 1, len = ogmeme.length; i < len && i < 16; i+=1) {
         if (!/\s/.test(ogmeme[i]))
             meme += '\n' + ogmeme[i];
     }
@@ -315,7 +315,12 @@ controller.hears(['((^|\\s)(\\w\\s){1,15}(\\w$|\\w\\s))', '#meme ((\\w){3:16})']
 });
 
 
-controller.hears(['#green (.+)'], 'message_received', function(bot, message) {
+controller.hears(['#green'], 'message_received', function(bot, message) {
+    var msg = message.text
+        .replaceAll('\\n', '\n')
+        .replaceAll('\n', '%0A')
+
+    var text = msg.substring(msg.indexOf('#green') + 6).trim();
 
     bot.reply(message, {
         attachment: {
