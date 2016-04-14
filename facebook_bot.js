@@ -99,8 +99,7 @@ controller.setupWebserver(process.env.port || process.env.PORT || 3000, function
 });
 
 
-controller.hears(['hello', 'hi'], 'message_received', function(bot, message) {
-
+controller.hears(['#hello'], 'message_received', function(bot, message) {
 
     controller.storage.users.get(message.user, function(err, user) {
         if (user && user.name) {
@@ -286,7 +285,7 @@ controller.hears(['shutdown'], 'message_received', function(bot, message) {
 });*/
 
 
-controller.hears(['uptime', 'identify yourself', 'who are you', 'what is your name'], 'message_received',
+controller.hears(['#uptime', '#mm-about', '#mm-uptime'], 'message_received',
     function(bot, message) {
 
         var hostname = os.hostname();
@@ -301,7 +300,7 @@ controller.hears(['uptime', 'identify yourself', 'who are you', 'what is your na
 controller.hears(['#mm-version'], 'message_received',
     function(bot, message) {
         bot.reply(message,
-            'alpha 1.1');
+            'alpha 1.2');
     });
 
 controller.hears(['((^|\\s)(\\w\\s){1,15}(\\w$|\\w\\s))', '#meme ((\\w){3:16})'],'message_received',function(bot, message) {
@@ -351,11 +350,11 @@ controller.hears(['#green (.+)'], 'message_received', function(bot, message) {
     });
 });
 
-
+/*
 controller.on('message_received', function(bot, message) {
     bot.reply(message, 'Try: `what is my name` or `structured` or `call me captain`');
     return false;
-});
+});*/
 
 
 function formatUptime(uptime) {
