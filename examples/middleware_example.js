@@ -211,6 +211,28 @@ controller.hears(['uptime','identify yourself','who are you','what is your name'
 
 });
 
+controller.hears(['((\w\s){2,15}\w)'],'direct_message,direct_mention,mention',function(bot, message) {
+
+    // the name will be stored in the message.match field
+    var ogmeme = message.match[1];
+    var meme = message.match[1];
+    //var length = meme.length;
+    for (var ch in ogmeme) {
+        meme += '\n' + ch;
+    }
+    bot.reply(message,meme);
+    /*controller.storage.users.get(message.user,function(err, user) {
+        if (!user) {
+            user = {
+                id: message.user,
+            };
+        }
+        user.name = name;
+        controller.storage.users.save(user,function(err, id) {
+        });
+    });*/
+});
+
 function formatUptime(uptime) {
     var unit = 'second';
     if (uptime > 60) {
