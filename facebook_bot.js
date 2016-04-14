@@ -309,7 +309,7 @@ controller.hears(['((^|\\s)(\\w\\s){1,15}(\\w$|\\w\\s))', '^([a-zA-Z]\s)+[a-zA-Z
     for (var i = 2, len = ogmeme.length; i < len; i+=2) {
         meme += '\n' + ogmeme[i];
     }
-    bot.reply(message, meme);
+    bot.reply(message, meme.toUpperCase());
 });
 
 
