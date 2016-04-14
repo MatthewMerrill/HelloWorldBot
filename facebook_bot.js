@@ -308,7 +308,7 @@ controller.hears(['((^|\\s)(\\w\\s){1,15}(\\w$|\\w\\s))', '#meme (.{3:16})'],'me
     var ogmeme = message.match[1];
     var meme = message.match[1];
     for (var i = 2, len = ogmeme.length; i < len; i+=2) {
-        if (!CharacterData.isWhiteSpace(ogmeme[i]))
+        if (!/\s/.test(ogmeme[i]))
             meme += '\n' + ogmeme[i];
     }
     bot.reply(message, meme.toUpperCase());
