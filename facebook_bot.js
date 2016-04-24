@@ -309,17 +309,6 @@ controller.hears(['#mm-version'], 'message_received',
             'alpha 1.2');
     });
 
-controller.hears(['((^|\\s)(\\w\\s){1,15}(\\w$|\\w\\s))', '#meme (.+)'],'message_received',function(bot, message) {
-    var ogmeme = message.match[1].trim();
-    var meme = message.match[1].trim();
-    for (var i = 1, len = ogmeme.length; i < len && i < 16; i+=1) {
-        if (!/\s/.test(ogmeme[i]))
-            meme += '\n' + ogmeme[i];
-    }
-    bot.reply(message, meme.toUpperCase());
-});
-
-
 controller.hears(['#green'], 'message_received', function(bot, message) {
     var msg = message.text
         .replaceAll('\\n', '\n')
@@ -363,6 +352,16 @@ controller.hears(['#green'], 'message_received', function(bot, message) {
             }
         }
     });
+});
+
+controller.hears(['((^|\\s)(\\w\\s){1,15}(\\w$|\\w\\s))', '#meme (.+)'],'message_received',function(bot, message) {
+    var ogmeme = message.match[1].trim();
+    var meme = message.match[1].trim();
+    for (var i = 1, len = ogmeme.length; i < len && i < 16; i+=1) {
+        if (!/\s/.test(ogmeme[i]))
+            meme += '\n' + ogmeme[i];
+    }
+    bot.reply(message, meme.toUpperCase());
 });
 
 /*
